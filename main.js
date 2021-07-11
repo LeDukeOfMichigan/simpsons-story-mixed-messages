@@ -21,26 +21,33 @@ let buildSubjects = (subjArray) => {
   let randSubjLength = Math.floor(Math.random()*4)+1;
   let fullSubjectString;
 
+  //This if-block manages the cases for when we select 1, 2, or more subjects
   if(randSubjLength === 1) {
+    //return just the one subject
     fullSubjectString = subjArray[Math.floor(Math.random()*subjArray.length)];
   } else if (randSubjLength === 2) {
+    //combine the subjects with an "and"
     let firstSubject = subjArray[Math.floor(Math.random()*subjArray.length)];
     let secondSubject = subjArray[Math.floor(Math.random()*subjArray.length)];
     fullSubjectString = firstSubject + ' and ' + secondSubject;
   } else if (randSubjLength >= 3) {
+    //populate an array of subjects to combine
     let subjCommaArray = [];
-    for(let i = 0; i < randSubjLength; i++) {
+    for(let i = 0; i < randSubjLength - 1; i++) {
       let j = Math.floor(Math.random()*subjArray.length);
       subjCommaArray.push(subjArray[j]);
       subjArray.splice(j, 1);
 
     }
+    //randomly select a final element
     let finalSubject = subjArray[Math.floor(Math.random()*subjArray.length)];
+    //set the final concatenated list with an Oxford comma
     fullSubjectString = subjCommaArray.join(', ') + ', and ' + finalSubject;
   }
   return fullSubjectString;
 }
 
+//This concatenates the subjects with a single verb, predicate, and closing punctuation.
 let craftRandomMessage = () => {
   let message = buildSubjects(subjects)
     + ' ' + verbs[Math.floor(Math.random()*verbs.length)]
@@ -50,6 +57,7 @@ let craftRandomMessage = () => {
   return message;
 }
 
+//Generate 5 random messages to the console each time the app runs
 for(let i = 0; i < 5; i++) {
   console.log(craftRandomMessage());
 }
