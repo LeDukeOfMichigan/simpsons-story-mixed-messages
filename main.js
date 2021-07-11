@@ -1,22 +1,26 @@
 //initialize arrays of terms to use for messages
 let subjects = [];
 let verbs = [];
+let adjectives = [];
 let predicates = [];
 let punctuation = [];
 
 //populate arrays with terms we want to use in our messages
-subjects.push('Carl','Lenny','Homer','Bart','Lisa','Marge',
+subjects.push('Carl','Lenny','Homer','Bart','Lisa','Marge','Maggie',
               'Ned','Maude','Barney','Moe','Seymore','Edna','Mr. Burns','Ralph');
 verbs.push('farted','ate','ran','walked','became','loved','wrote','hated','joked','pranked','humiliated');
-predicates.push('flowers','scared','happy','Lisa','Ralph','together');
+adjectives.push('scary','happy','ludicrous','hilarious','bombastic','delusional'); //These are not yet implemented, feel free to implement them
+predicates.push('flowers','scared','happy','Lisa','Ralph','pizza','letters','Kool-Aid','Mr. T','World of Warcraft');
 punctuation.push('.','!','?');
 
+//This crafts a set of subjects randomly, it will choose a different number of subjects each time it is called
 let buildSubjects = (subjArray) => {
-  if(!Array.isArray(subjArray)) {
-    return 'Please pass an array to this function';
+  if(!Array.isArray(subjArray) || subjArray.length < 4) {
+    return 'Please pass an array of strings with at least 4 elements to this function';
   }
-  let randSubjLength = Math.floor(Math.random()*5)+1;
+  let randSubjLength = Math.floor(Math.random()*4)+1;
   let fullSubjectString;
+
   if(randSubjLength === 1) {
     fullSubjectString = subjArray[Math.floor(Math.random()*subjArray.length)];
   } else if (randSubjLength === 2) {
